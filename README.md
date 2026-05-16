@@ -26,6 +26,7 @@ simple 是一个支持中文和拼音的 [sqlite3 fts5](https://www.sqlite.org/f
 * C# 例子 https://github.com/dudylan/SqliteCheck/
 * Rust 例子 https://github.com/xuxiaocheng0201/libsimple/
 * Android Flutter 的例子 https://github.com/SageMik/sqlite3_simple
+* React Native op-sqlite 例子 [examples/react-native-op-sqlite.md](./examples/react-native-op-sqlite.md)
 
 ### 命令行使用
 
