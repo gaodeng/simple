@@ -27,8 +27,20 @@ set(SOURCE_FILES
 )
 
 OPTION(BUILD_STATIC "Option to build static lib" OFF)
-if (IOS OR BUILD_STATIC)
-# iOS only support static library.
+OPTION(BUILD_IOS_DYNAMIC_FRAMEWORK "Option to build iOS dynamic framework" OFF)
+if (IOS AND BUILD_IOS_DYNAMIC_FRAMEWORK)
+add_library(simple SHARED ${SOURCE_FILES})
+set_target_properties(simple PROPERTIES
+    FRAMEWORK TRUE
+    MACOSX_FRAMEWORK_IDENTIFIER "fm.moon.simple"
+    PUBLIC_HEADER "pinyin.h;simple_highlight.h;simple_tokenizer.h"
+    XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED "NO"
+    XCODE_ATTRIBUTE_DEFINES_MODULE "YES"
+    XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "fm.moon.simple"
+    XCODE_ATTRIBUTE_SKIP_INSTALL "NO"
+)
+elseif (IOS OR BUILD_STATIC)
+# iOS releases default to static libraries unless BUILD_IOS_DYNAMIC_FRAMEWORK is enabled.
 add_library(simple STATIC ${SOURCE_FILES})
 else()
 add_library(simple SHARED ${SOURCE_FILES})
